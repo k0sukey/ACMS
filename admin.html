@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ACMS admin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Kosuke Isobe">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+body {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  background-image: url(image/whitey.png);
+  font-family: 'Lucida Grande', Calibri, Helvetica, Arial, sans-serif;
+  text-shadow: -1px 1px 0 rgba(255,255,255,1);
+}
+
+/* Custom container */
+.container-narrow {
+  margin: 0 auto;
+  max-width: 960px;
+}
+.container-narrow > hr {
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  box-shadow: rgba(255,255,255,1) 0 1px 0;
+}
+
+.masthead a {
+  text-decoration: none;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  margin: 30px 0;
+  text-align: center;
+}
+.jumbotron h1 {
+  text-align: center;
+  font-size: 42px;
+  line-height: 1;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+#controll,
+#authorize,
+#articles,
+#postform,
+#editform {
+  display: none;
+}
+
+#articles li {
+  margin-bottom: 10px;
+}
+
+.page-header {
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  box-shadow: rgba(255,255,255,1) 0 1px 0;
+}
+
+.page-body {
+  margin-bottom: 30px;
+}
+
+#socials li {
+  font-size: 28px;
+}
+#socials li a {
+  text-decoration: none;
+}
+    </style>
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/favicon.ico">
+  </head>
+
+  <body>
+    <div class="container-narrow">
+
+      <div class="masthead">
+        <ul id="controll" class="nav nav-pills pull-right">
+          <li><a id="newpost" href="#"><i class="icon-edit"></i> New post</a></li>
+          <li><a id="logout" href="#"><i class="icon-signout"></i> Logout</a></li>
+        </ul>
+        <h3><a href="admin.html"><span class="muted">AC</span>M<span class="muted">S admin</span></a></h3>
+      </div>
+
+      <hr>
+
+      <div id="authorize" class="row-fluid">
+        <div class="span12">
+          <form class="form-horizontal">
+            <fieldset>
+              <div class="control-group span6">
+                <label class="control-label" for="username">Username or E-Mail</label>
+                <div class="controls"><input id="username" class="input-block-level" type="text" placeholder="Required"></div>
+              </div>
+              <div class="control-group span6">
+                <label class="control-label" for="password">Password</label>
+                <div class="controls"><input id="password" class="input-block-level" type="password" placeholder="Required"></div>
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <button type="button" id="login" class="btn btn-large btn-success"><i class="icon-signin"></i> Login</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="postform" class="row-fluid">
+        <div class="span12">
+          <form class="form-horizontal">
+            <fieldset>
+              <div class="control-group">
+                <label class="control-label" for="posttitle">Title</label>
+                <div class="controls"><input id="posttitle" class="input-block-level" type="text" placeholder="Required"></div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="postcontent">Content</label>
+                <div class="controls"><textarea id="postcontent" class="input-block-level" rows="5" placeholder="Required"></textarea></div>
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <button type="button" id="submitpost" class="btn btn-large btn-success"><i class="icon-edit"></i> Post</button>
+              <button type="button" id="cancelpost" class="btn btn-large"><i class="icon-undo"></i> Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="editform" class="row-fluid">
+        <div class="span12">
+          <form class="form-horizontal">
+            <fieldset>
+              <div class="control-group">
+                <label class="control-label" for="edittitle">Title</label>
+                <div class="controls"><input id="edittitle" class="input-block-level" type="text" placeholder="Required"></div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="editcontent">Content</label>
+                <div class="controls"><textarea id="editcontent" class="input-block-level" rows="5" placeholder="Required"></textarea></div>
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <input type="hidden" id="editpostid" value="">
+              <button type="button" id="submitedit" class="btn btn-large btn-success"><i class="icon-edit"></i> Edit</button>
+              <button type="button" id="canceledit" class="btn btn-large"><i class="icon-undo"></i> Cancel</button>
+              <button type="button" id="deleteedit" class="btn btn-large btn-danger pull-right"><i class="icon-remove-circle"></i> Delete</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div id="articles" class="row-fluid">
+        <div class="span12"><ul class="unstyled lead"></ul></div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://sdk.cocoafish.com/js/cocoafish-1.2.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script type="text/javascript">
+var sdk = new Cocoafish('ErZ40baEFpGdaVvZmmBKU8umdn1GqJuD');
+
+$(function(){
+var loadArticles = function(){
+  $('#articles ul').empty();
+
+  sdk.sendRequest('posts/query.json', 'GET', {
+    limit: 10,
+    skip: 0,
+    order: '-created_at'
+  }, function(e){
+    if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'queryPosts') {
+      if (e.response.posts.length === 0) {
+          $('#articles ul').append('<li>No posted</li>');
+      } else {
+        _.each(e.response.posts, function(post){
+          $('#articles ul').append('<li><span class="muted">' + moment(post.created_at).utc().local().format('YYYY-MM-DD HH:mm:ss') + '</span> <a id="' + post.id + '" class="editpost" href="#" title="' + post.title + '">' + post.title + '</a></li>');
+        });
+      }
+    }
+  });
+};
+
+sdk.sendRequest('users/show/me.json', 'GET', null, function(e){
+  if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'showMe') {
+    $('#controll').show();
+    $('#articles').show(loadArticles);
+  } else {
+    $('#authorize').show();
+  }
+});
+
+$('#login').click(function(){
+  var error = false;
+
+  if ($('#username').val() === '' && !$('#username').hasClass('error')) {
+    $('#username').addClass('error');
+    error = true;
+  }
+
+  if ($('#password').val() === '' && !$('#password').hasClass('error')) {
+    $('#password').addClass('error');
+    error = true;
+  }
+
+  if (error) {
+    return;
+  }
+
+  sdk.sendRequest('users/login.json', 'POST', {
+    login: $('#username').val(),
+    password: $('#password').val()
+  }, function(e){
+    if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'loginUser') {
+      $('#authorize').hide();
+      $('#controll').show();
+      $('#articles').show(loadArticles);
+    } else {
+      if (!$('#username').hasClass('error')) {
+        $('#username').addClass('error');
+      }
+
+      if (!$('#password').hasClass('error')) {
+        $('#password').addClass('error');
+      }
+    }
+
+    return;
+  });
+});
+
+$('#logout').click(function(){
+  sdk.sendRequest('users/logout.json', 'GET', null, function(e){
+    if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'logoutUser') {
+      $('#authorize').show();
+      $('#controll').hide();
+      $('#articles').hide();
+      $('#postform').hide();
+      $('#editform').hide();
+    }
+  });
+});
+
+$('#newpost').click(function(){
+  $('#articles').hide();
+  $('#editform').hide();
+  $('#postform').show();
+});
+
+$('#submitpost').click(function(){
+  var error = false;
+
+  if ($('#posttitle').val() === '' && !$('#posttitle').hasClass('error')) {
+    $('#posttitle').addClass('error');
+    error = true;
+  }
+
+  if ($('#postcontent').val() === '' && !$('#postcontent').hasClass('error')) {
+    $('#postcontent').addClass('error');
+    error = true;
+  }
+
+  if (error) {
+    return;
+  }
+
+  sdk.sendRequest('posts/create.json', 'POST', {
+    title: $('#posttitle').val(),
+    content: $('#postcontent').val(),
+    acl_name: 'Posts'
+  }, function(e){
+    if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'createPost') {
+      $('#postform').hide();
+      $('#articles').show(loadArticles);
+
+      $('#posttitle').val('');
+      $('#postcontent').val('');
+    } else {
+      if (!$('#posttitle').hasClass('error')) {
+        $('#posttitle').addClass('error');
+      }
+
+      if (!$('#postcontent').hasClass('error')) {
+        $('#postcontent').addClass('error');
+      }
+    }
+  });
+});
+
+$('#cancelpost').click(function(){
+  $('#postform').hide();
+  $('#articles').show();
+
+  $('#posttitle').val('');
+  $('#postcontent').val('');
+});
+
+$('.editpost').live('click', function(){
+  var id = $(this).attr('id');
+
+  $('#articles').hide();
+  $('#editform').show();
+
+  sdk.sendRequest('posts/show.json', 'GET', {
+    post_id: id
+  }, function(e){
+    if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'showPosts') {
+      var post = e.response.posts[0];
+
+      $('#edittitle').val(post.title);
+      $('#editcontent').val(post.content);
+      $('#editpostid').val(post.id);
+    }
+  });
+});
+
+$('#submitedit').click(function(){
+  var error = false;
+
+  if ($('#edittitle').val() === '' && !$('#edittitle').hasClass('error')) {
+    $('#edittitle').addClass('error');
+    error = true;
+  }
+
+  if ($('#editcontent').val() === '' && !$('#editcontent').hasClass('error')) {
+    $('#editcontent').addClass('error');
+    error = true;
+  }
+
+  if (error) {
+    return;
+  }
+
+  sdk.sendRequest('posts/update.json', 'PUT', {
+    post_id: $('#editpostid').val(),
+    title: $('#edittitle').val(),
+    content: $('#editcontent').val()
+  }, function(e){
+    if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'updatePost') {
+      $('#editform').hide();
+      $('#articles').show(loadArticles);
+
+      $('#edittitle').val('');
+      $('#editcontent').val('');
+    } else {
+      if (!$('#edittitle').hasClass('error')) {
+        $('#edittitle').addClass('error');
+      }
+
+      if (!$('#editcontent').hasClass('error')) {
+        $('#editcontent').addClass('error');
+      }
+    }
+  });
+});
+
+$('#canceledit').click(function(){
+  $('#editform').hide();
+  $('#articles').show();
+
+  $('#edittitle').val('');
+  $('#editcontent').val('');
+  $('#editpostid').val('');
+});
+
+$('#deleteedit').click(function(){
+  sdk.sendRequest('posts/delete.json', 'DELETE', {
+    post_id: $('#editpostid').val()
+  }, function(e){
+    if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'deletePost') {
+      $('#editform').hide();
+      $('#articles').show(loadArticles);
+
+      $('#edittitle').val('');
+      $('#editcontent').val('');
+      $('#editpostid').val('');
+    }
+  });
+});
+})();
+    </script>
+  </body>
+</html>

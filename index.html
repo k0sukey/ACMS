@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ACMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Kosuke Isobe">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+body {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  background-image: url(image/whitey.png);
+  font-family: 'Lucida Grande', Calibri, Helvetica, Arial, sans-serif;
+  text-shadow: -1px 1px 0 rgba(255,255,255,1);
+}
+
+/* Custom container */
+.container-narrow {
+  margin: 0 auto;
+  max-width: 960px;
+}
+.container-narrow > hr {
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  box-shadow: rgba(255,255,255,1) 0 1px 0;
+}
+
+.masthead a {
+  text-decoration: none;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  margin: 30px 0;
+}
+.jumbotron h1 {
+  text-align: center;
+  font-size: 42px;
+  line-height: 1;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+.page-header {
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  box-shadow: rgba(255,255,255,1) 0 1px 0;
+}
+
+.page-body {
+  margin-bottom: 30px;
+}
+
+.ellipsis {
+  height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#socials li {
+  font-size: 28px;
+}
+
+#socials li a {
+  text-decoration: none;
+}
+
+.forkme {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: 0;
+}
+    </style>
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/favicon.ico">
+  </head>
+
+  <body>
+    <div class="container-narrow">
+      <div>
+        <a href="https://k0sukey.github.com/ACMS"><img class="forkme" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+      </div>
+
+      <div class="masthead">
+        <h3><a href="index.html"><span class="muted">AC</span>M<span class="muted">S</span></a></h3>
+      </div>
+
+      <hr>
+
+      <div class="jumbotron">
+        <h1>CMS on ACS</h1>
+      </div>
+
+      <div class="row-fluid">
+        <div id="article" class="span9"></div>
+
+        <div class="span3">
+          <h4>About</h4>
+          <p>ACS is mobile backend only? No no, can make CMS backend! This experimental project is alpha version. Do not use for product.</p>
+          <h4>Author</h4>
+          <p>Kosuke Isobe</p>
+          <ul id="socials" class="unstyled">
+            <li class="pull-left"><a href="https://twitter.com/k0sukey" title="Twitter"><i class="icon-twitter"></i></a></li>
+            <li class="pull-left"><a href="http://www.facebook.com/k0sukey" title="Facebook"><i class="icon-facebook-sign"></i></a></li>
+            <li class="clearfix"><a href="https://github.com/k0sukey" title="GitHub"><i class="icon-github"></i></a></li>
+          </ul>
+          <h4>Credits</h4>
+          <ul id="credits" class="unstyled">
+            <li><i class="icon-chevron-right"></i> <a href="http://www.appcelerator.com/cloud" title="Appcelerator Cloud Services">Appcelerator Cloud Services</a></li>
+            <li><i class="icon-chevron-right"></i> <a href="http://twitter.github.com/bootstrap/" title="Bootstrap">Bootstrap</a></li>
+            <li><i class="icon-chevron-right"></i> <a href="http://underscorejs.org/" title="Underscore.js">Underscore.js</a></li>
+            <li><i class="icon-chevron-right"></i> <a href="http://momentjs.com/" title="Moment.js">Moment.js</a></li>
+            <li><i class="icon-chevron-right"></i> <a href="http://jquery.com/" title="jQuery">jQuery</a></li>
+            <li><i class="icon-chevron-right"></i> <a href="https://github.com/allmarkedup/jQuery-URL-Parser" title="jQuery-URL-Parser">jQuery-URL-Parser</a></li>
+            <li><i class="icon-chevron-right"></i> <a href="http://fortawesome.github.com/Font-Awesome" title="Font Awesome">Font Awesome</a></li>
+            <li><i class="icon-chevron-right"></i> <a href="http://subtlepatterns.com/" title="Subtle Patterns">Subtle Patterns</a>, <a href="http://subtlepatterns.com/whitey/" title="Whitey">Whitey by Ant Ekşiler.</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="fb-root"></div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//sdk.cocoafish.com/js/cocoafish-1.2.min.js"></script>
+    <script src="//connect.facebook.net/en_US/all.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/purl.js"></script>
+    <script type="text/javascript">
+var sdk = new Cocoafish('ErZ40baEFpGdaVvZmmBKU8umdn1GqJuD');
+
+FB.init({
+  appId: '412407485497698',
+  channelUrl: '//localhost:8888/',
+  status: true,
+  cookie: true,
+  xfbml: true
+});
+
+var loadArticles = function(page){
+  if (page === 1) {
+    $('#article').empty();
+  }
+
+  var limit = 5;
+  var skip = (page - 1) * limit;
+
+  sdk.sendRequest('posts/query.json', 'GET', {
+    limit: limit,
+    skip: skip,
+    order: '-created_at'
+  }, function(e){
+    if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'queryPosts') {
+      if (e.response.posts.length === 0) {
+        if (page === 1) {
+          $('#article').append('<p class="lead muted">Post not found.</p>');
+        } else {
+          $('#article').append('<p class="lead muted">No more posts.</p>');
+        }
+      } else {
+        _.each(e.response.posts, function(post){
+          $('#article').append('<h2 class="page-header"><a class="article" href="#' + post.id + '" title="' + post.title + '">' + post.title + '</a></h2>'
+            + '<p class="muted"><i class="icon-time"></i> ' + moment(post.created_at).utc().local().format('YYYY-MM-DD HH:mm:ss') + '</p>'
+            + '<p class="page-body ellipsis lead">' + post.content + '</p>');
+        });
+
+        $('#article').append('<p><a id="pagination" href="#" class="btn input-block-level">Load more posts</a></p>');
+      }
+    }
+
+    return false;
+  });
+};
+
+var current = 1;
+
+$('#pagination').live('click', function(){
+  $(this).parent().remove();
+  current++;
+  loadArticles(current);
+});
+
+var loadArticle = function(id){
+  $('#article').empty();
+
+  sdk.sendRequest('posts/show.json', 'GET', {
+    post_id: id
+  }, function(e){
+    if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'showPosts') {
+      var post = e.response.posts[0];
+
+      $('#article').append('<h2 class="page-header">' + post.title + '</h2>'
+        + '<p class="muted"><i class="icon-time"></i> ' + moment(post.created_at).utc().local().format('YYYY-MM-DD HH:mm:ss') + '</p>'
+        + '<p class="page-body lead">' + post.content + '</p>');
+
+      $('#article').append('<h3>Comments</h3><dl class="dl-horizontal"></dl>');
+
+      sdk.sendRequest('reviews/query.json', 'GET', {
+        post_id: id,
+        limit: 10,
+        skip: 0,
+        order: '-created_at'
+      }, function(e){
+        if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'queryReviews') {
+          _.each(e.response.reviews, function(review){
+            $('#article dl').append('<dt><img class="img-polaroid" src="https://graph.facebook.com/' + review.custom_fields.id + '/picture" alt="' + review.custom_fields.name + '"></dt>'
+              + '<dd>' + review.custom_fields.name
+              + ' <span class="muted"><i class="icon-time"></i> ' + moment(review.created_at).utc().local().format('YYYY-MM-DD HH:mm:ss') + '</span></dd>'
+              + '<dd>' + $('<div/>').text(review.content).html() + '</dd>');
+          });
+        }
+
+        FB.getLoginStatus(function(e){
+          if (e.status === 'connected') {
+            loadForm(id);
+          } else {
+            $('#article').append('<p><a id="facebook" article="' + id + '" class="btn" href="#"><i class="icon-facebook-sign"></i> You must be logged in with Facebook to leave a comment.</a></p>');
+          }
+        });
+      });
+    } else {
+      $('#article').append('<p class="lead">Post not found.</p>');
+    }
+  });
+};
+
+var loadForm = function(id){
+  sdk.sendRequest('users/show/me.json', 'GET', null, function(e){
+    if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'showMe') {
+      sdk.sendRequest('reviews/query.json', 'GET', {
+        owner_id: e.response.users[0].id,
+        post_id: id
+      }, function(e){
+        if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'queryReviews') {
+          if (e.response.reviews.length === 0) {
+            $('#article').append('<form id="commentform" class="form-horizontal"><fieldset>'
+              + '<div class="control-group"><label class="control-label" for="comment">Your comment</label>'
+              + '<div class="controls"><textarea id="comment" class="input-block-level" rows="3" placeholder="Required"></textarea></div>'
+              + '</div></fieldset><div class="form-actions">'
+              + '<input type="hidden" id="id" value="' + id + '">'
+              + '<button type="button" id="post" class="btn btn-large btn-success"><i class="icon-edit"></i> Post</button>'
+              + '</div></form>');
+          }
+        } else {
+          $('#article').append('<p><a id="facebook" article="' + id + '" class="btn" href="#"><i class="icon-facebook-sign"></i> You must be logged in with Facebook to leave a comment.</a></p>');
+        }
+      });
+    } else {
+      $('#article').append('<p><a id="facebook" article="' + id + '" class="btn" href="#"><i class="icon-facebook-sign"></i> You must be logged in with Facebook to leave a comment.</a></p>');
+    }
+  });
+};
+
+$('#post').live('click', function(){
+  FB.api('/me', function(e){
+    sdk.sendRequest('reviews/create.json', 'POST', {
+      post_id: $('#id').val(),
+      content: $('#comment').val(),
+      custom_fields: JSON.stringify({
+        id: e.id,
+        name: e.name
+      })
+    }, function(e){
+      if (e && e.meta && e.meta.status === 'ok' && e.meta.code === 200 && e.meta.method_name === 'createReview') {
+        $('#article dl').append('<dt><img src="https://graph.facebook.com/' + e.response.reviews[0].custom_fields.id + '/picture" alt="' + e.response.reviews[0].custom_fields.name + '"></dt>'
+          + '<dd>' + e.response.reviews[0].custom_fields.name + '</dd>'
+          + '<dd>' + $('<div/>').text(e.response.reviews[0].content).html() + '</dd>');
+
+        $('#commentform').remove();
+      }
+    });
+  });
+});
+
+$('#facebook').live('click', function(){
+  var id = $(this).attr('article');
+
+  FB.login(function(e){
+    if (e.authResponse) {
+      sdk.sendRequest('users/external_account_login.json', 'POST', {
+        id: e.authResponse.userID,
+        type: 'facebook',
+        token: e.authResponse.accessToken
+      }, function(e){
+        $('#facebook').parent().remove();
+        loadForm(id);
+      });
+    } else {
+      alert('User cancelled login or did not fully authorize.');
+    }
+  });
+});
+
+$('.article').live('click', function(){
+  loadArticle($(this).attr('href').substr(1));
+});
+
+$(function(){
+if ($.url().fsegment()[0]) {
+  loadArticle($.url().fsegment()[0]);
+} else {
+  loadArticles(current);
+}
+})();
+    </script>
+  </body>
+</html>
